@@ -13,8 +13,18 @@ class ApiResponse
             "status" => "success"
         ], 200);
     }
-    public function ok(string $message)
+    public static function ok(string $message, mixed $data = null)
     {
-        return self:: success($message);
+        return self::success($message, $data);
+    }
+    public static function error(mixed $errors, string $message)
+    {
+        return response()->json([
+
+            "errors" => $errors,
+            "message" => $message,
+            "data" => [],
+            "status" => "fail"
+        ], 400);
     }
 }
